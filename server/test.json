@@ -1,0 +1,22 @@
+{
+    "users": [
+        {
+            "id": 1,
+            "name": "Silas Carlson",
+            "birthDate": "2004-03-02",
+            "age": 21
+        },
+        {
+            "id": 2,
+            "name": "JR Carlson",
+            "birthDate": "1972-10-10",
+            "age": 52
+        },
+        {
+            "id": 3,
+            "name": "John Smith",
+            "birthDate": "2000-10-31",
+            "age": 24
+        }
+    ]
+}
