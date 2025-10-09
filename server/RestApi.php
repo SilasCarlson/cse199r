@@ -20,8 +20,19 @@
 
             if (property_exists($this->data, "handler")) {
                 $class_name = "Handlers\\" . $this->data->handler;
-                $class = new $class_name();
-                $result = $class->get_result();
+                $authorized_token = !$class_name::REQUIRES_AUTH_TOKEN;
+
+                if (!$authorized_token) {
+                    $token = \Models\UserSession::get_with_user_id($this->data->user_id);
+                    $authorized_token = $token != null && $token->get_token() == $this->data->token && !$token->is_expired();
+                }
+
+                if ($authorized_token) {
+                    $class = new $class_name();
+                    $result = $class->get_result();
+                } else {
+                    $result['message'] = "Unauthorized request";
+                }
             }
 
             echo json_encode($result);

@@ -1,28 +1,25 @@
-import "../App.css";
-import "../framework.css";
-
 import { useActionState } from "react";
+import { useAuth } from "../Context/AuthContext";
 
 function Login() {
-    async function submit(previousState, formData) {
-        const postData = {
-            handler: "Login",
-            username: formData.get("username"),
-            password: formData.get("password")
-        }
+    const { login } = useAuth();
 
+    async function submit(previousState, formData) {
         try {
             const response = await fetch("http://localhost/freshman-project/server/restapi.php", {
                 method: "POST",
-                body: JSON.stringify(postData)
+                body: JSON.stringify({
+                    handler: "Login",
+                    username: formData.get("username"),
+                    password: formData.get("password")
+                })
             });
             const result = await response.json();
 
             if (!result.success) return new Error(result.message).toString();
 
             // Log the user in!
-            localStorage.setItem("authToken", result.token);
-            localStorage.setItem("user_id", result.user_id);
+            login(result.token, result.user_id);
         } catch (error) {
             return error.toString();
         }

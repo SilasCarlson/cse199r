@@ -7,6 +7,7 @@
         private int $user_id;
         private string $token;
         private string $expiry;
+        private bool $expired = false;
 
 
         public function __construct(int $id) {
@@ -19,6 +20,25 @@
             $this->user_id = $properties['user_id'];
             $this->token = $properties['token'];
             $this->expiry = $properties['expiry'];
+
+            // Check expiry
+            $expiry_date = strtotime($properties['expiry']);
+
+            if ($expiry_date < time()) {
+                $this->expired = true;
+            }
+
+        }
+
+        public static function get_with_user_id(int $user_id): UserSession|null {
+            $result = \Server::get_instance()->database_query("SELECT * FROM user_sessions WHERE user_id=? ORDER BY id DESC LIMIT 1", [$user_id]);
+
+            if ($result->num_rows > 0) {
+                $result = $result->fetch_assoc();
+                return new UserSession($result['id']);
+            }
+
+            return null;
         }
 
         public static function insert(int $user_id): UserSession {
@@ -38,5 +58,13 @@
 
         public function get_token(): string {
             return $this->token;
+        }
+
+        public function get_user_id(): int {
+            return $this->user_id;
+        }
+
+        public function is_expired(): bool {
+            return $this->expired;
         }
     }

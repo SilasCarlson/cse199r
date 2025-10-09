@@ -2,7 +2,7 @@
     namespace Handlers;
 
     class Login extends \Handler {
-       const REQUIRES_TOKEN = false;
+       const REQUIRES_AUTH_TOKEN = false;
 
         public function __construct() {
             parent::__construct();

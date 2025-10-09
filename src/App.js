@@ -1,20 +1,23 @@
 import './App.css';
-import Login from "./Forms/Login";
-import UserProfile from "./Components/UserProfile";
+import './framework.css';
+import { useAuth } from "./Context/AuthContext"
+import Login from "./Pages/Login";
+import UserProfile from "./Pages/UserProfile";
 
 function App() {
+    const { user } = useAuth();
 
-    if (!localStorage.getItem("authToken")) {
+    if (user) {
         return (
             <>
-                <Login />
+                <UserProfile />
             </>
         )
     }
 
     return (
         <>
-            <UserProfile />
+            <Login />
         </>
     )
 }
