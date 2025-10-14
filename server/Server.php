@@ -12,13 +12,14 @@
     class Server {
         private static ?Server $instance = null;
         private mysqli $database;
+        private array $config;
 
         public function __construct() {
             // Get database credentials
-            $config = parse_ini_file("config.env");
+            $this->config = parse_ini_file("config.env");
 
             // Connection
-            $this->database = new mysqli($config["DATABASE_HOST"], $config["DATABASE_USERNAME"], $config["DATABASE_PASSWORD"], $config["DATABASE_NAME"]);
+            $this->database = new mysqli($this->config["DATABASE_HOST"], $this->config["DATABASE_USERNAME"], $this->config["DATABASE_PASSWORD"], $this->config["DATABASE_NAME"]);
         }
 
         public static function get_instance(): Server {
@@ -40,5 +41,9 @@
         public function database_row_exists(string $query, array $values): bool {
             $result = $this->database->execute_query($query, $values);
             return $result->num_rows > 0;
+        }
+
+        public function get_config(): array {
+            return $this->config;
         }
     }

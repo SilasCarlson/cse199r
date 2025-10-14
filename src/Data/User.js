@@ -1,13 +1,11 @@
 import { Server } from "./Server";
-import { useAuth } from "../Context/AuthContext";
 
 export const getUserData = async () => {
-    const apiResponse = await fetch(Server.apiUrl, {
+    const url = `${Server.apiUrl}get/user/profile/${localStorage.getItem("userId")}`;
+    const apiResponse = await fetch(url, {
         method: "POST",
         body: JSON.stringify({
-            handler: "UserProfile",
-            token: localStorage.getItem("authToken"),
-            user_id: localStorage.getItem("userId")
+            token: localStorage.getItem("authToken")
         })
     });
     const apiResult = await apiResponse.json();

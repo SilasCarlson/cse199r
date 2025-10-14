@@ -41,6 +41,17 @@
             return null;
         }
 
+        public static function get_with_token(string $token): UserSession|null {
+            $result = \Server::get_instance()->database_query("SELECT * FROM user_sessions WHERE token=?", [$token]);
+
+            if ($result->num_rows > 0) {
+                $result = $result->fetch_assoc();
+                return new UserSession($result['id']);
+            }
+
+            return null;
+        }
+
         public static function insert(int $user_id): UserSession {
             // Get data
             $token = bin2hex(random_bytes(32));

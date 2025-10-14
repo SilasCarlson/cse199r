@@ -5,20 +5,26 @@
     header("Content-Type: application/json");
 
     Class RestApi {
-        private mixed $data;
+        private mixed $post_data;
+        public static RestApi $instance;
 
         public function __construct() {
-            $this->data = json_decode(file_get_contents("php://input"));
+            $this->post_data = json_decode(file_get_contents("php://input")) ?? new stdClass();
         }
 
-        public function handle_request(): void {
+        public function handle_request(string $method, string $controller, string $action, array $data): void {
             // Result
             $result = array(
                 "success" => false,
                 "message" => "Unknown request",
             );
 
-            if (property_exists($this->data, "handler")) {
+            $controller_class_name = "Controllers\\" . $controller;
+            $controller = new $controller_class_name($data, $this->post_data);
+            $result = $controller->{$action}()->get_result();
+
+            /*
+            if (property_exists($this->data, "controller")) {
                 $class_name = "Handlers\\" . $this->data->handler;
                 $authorized_token = !$class_name::REQUIRES_AUTH_TOKEN;
 
@@ -34,10 +40,16 @@
                     $result['message'] = "Unauthorized request";
                 }
             }
+            */
 
             echo json_encode($result);
         }
-    }
 
-    $api = new RestApi();
-    $api->handle_request();
+        public static function get_instance(): RestApi {
+            if (!isset(self::$instance)) {
+                self::$instance = new RestApi();
+            }
+
+            return self::$instance;
+        }
+    }

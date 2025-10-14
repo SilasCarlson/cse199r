@@ -6,10 +6,9 @@ function Login() {
 
     async function submit(previousState, formData) {
         try {
-            const response = await fetch("http://localhost/freshman-project/server/restapi.php", {
+            const response = await fetch("http://localhost/freshman-project/server/post/user/login", {
                 method: "POST",
                 body: JSON.stringify({
-                    handler: "Login",
                     username: formData.get("username"),
                     password: formData.get("password")
                 })
@@ -19,7 +18,7 @@ function Login() {
             if (!result.success) return new Error(result.message).toString();
 
             // Log the user in!
-            login(result.token, result.user_id);
+            login(result.token, result["user_id"]);
         } catch (error) {
             return error.toString();
         }
