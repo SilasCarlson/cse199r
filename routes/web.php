@@ -3,6 +3,7 @@
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\SetsController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -17,3 +18,6 @@ Route::post("/register", RegisterController::class)->middleware("guest");
 
 Route::get("/logout", [UserController::class, "logout"])->name("auth.logout")->middleware("auth");
 Route::get("/user/{id}", [UserController::class, "index"])->middleware("auth");
+
+Route::get("/sets", [SetsController::class, "all"])->name("sets")->middleware("auth");
+Route::get("/set/{id}", [SetsController::class, "index"])->name("set")->middleware("auth");

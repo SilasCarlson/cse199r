@@ -149,6 +149,21 @@ a:hover {
 }
 
 /*
+    Tables
+*/
+table {
+    width: 100%;
+}
+
+table, tr, td, th {
+    border: 1px solid white;
+}
+
+td, th {
+    padding: 10px;
+}
+
+/*
     Properties
 */
 *[data-unselectable="true"] {
