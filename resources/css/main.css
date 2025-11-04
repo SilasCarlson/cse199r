@@ -155,6 +155,10 @@ table {
     width: 100%;
 }
 
+th {
+    font-weight: bold;
+}
+
 table, tr, td, th {
     border: 1px solid white;
 }

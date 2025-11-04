@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Sets extends Model
+class Word extends Model
 {
-    protected $table = 'sets';
+    protected $table = "words";
 }
