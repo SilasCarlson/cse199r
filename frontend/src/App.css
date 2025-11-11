@@ -12,3 +12,7 @@
     -ms-user-select: none;     /* For Internet Explorer/Edge */
     user-select: none;         /* Standard syntax */
 }
+
+input {
+    display: block;
+}
