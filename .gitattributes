@@ -4,3 +4,7 @@ backend/bootstrap/** linguist-vendored
 backend/config/** linguist-vendored
 backend/public/** linguist-vendored
 backend/storage/** linguist-vendored
+backend/database/** linguist-vendored
+backend/app/Http/Controller/Auth/** linguist-vendored
+backend/app/Middleware/** linguist-vendored
+backend/app/Requests/Auth/** linguist-vendored
