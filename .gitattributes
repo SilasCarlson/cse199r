@@ -1,4 +1,6 @@
-backend/bootstrap/* export-ignore
-backend/config/* export-ignore
-backend/public/* export-ignore
-backend/storage/* export-ignore
+# Auto detect text files and perform LF normalization
+* text=auto
+backend/bootstrap/** linguist-vendored
+backend/config/** linguist-vendored
+backend/public/** linguist-vendored
+backend/storage/** linguist-vendored
