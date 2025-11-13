@@ -6,4 +6,17 @@ backend/app/Http/Controllers/Auth/** linguist-vendored
 backend/app/Http/Middlewares/** linguist-vendored
 backend/app/Providers/** linguist-vendored
 backend/app/Requests/Auth/** linguist-vendored
-backend/config/*.php linguist-vendored
+
+# broooo
+backend/config/app.php linguist-vendored
+backend/config/auth.php linguist-vendored
+backend/config/cache.php linguist-vendored
+backend/config/cors.php linguist-vendored
+backend/config/database.php linguist-vendored
+backend/config/filesystems.php linguist-vendored
+backend/config/logging.php linguist-vendored
+backend/config/mail.php linguist-vendored
+backend/config/queue.php linguist-vendored
+backend/config/sanctum.php linguist-vendored
+backend/config/services.php linguist-vendored
+backend/config/session.php linguist-vendored
