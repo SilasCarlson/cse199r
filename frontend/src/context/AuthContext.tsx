@@ -1,11 +1,7 @@
 import {createContext, useState, useEffect, useContext} from "react";
 import { loginUser, logoutUser, getUser } from "../api/Auth";
-import type { JSX, ReactNode } from "react";
+import type { JSX } from "react";
 import type { User } from "../types/User";
-
-interface AuthProviderProps {
-    children: ReactNode;
-}
 
 export interface AuthContextType {
     user: User | null;
@@ -21,7 +17,7 @@ export function useAuth(): AuthContextType {
     return context;
 }
 
-export function AuthProvider({ children }: AuthProviderProps): JSX.Element {
+export function AuthProvider({ children }: { children: JSX.Element }): JSX.Element {
     const [ user, setUser ] = useState<User|null>(null);
 
     // Mount user

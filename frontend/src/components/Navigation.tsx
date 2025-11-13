@@ -1,5 +1,6 @@
 import type { JSX } from "react";
 import { useAuth } from "../context/AuthContext";
+import {Link} from "react-router-dom";
 
 function Navigation(): JSX.Element {
     const { user, logout } = useAuth();
@@ -7,13 +8,16 @@ function Navigation(): JSX.Element {
     return (
         <nav>
             <ul>
-                <li><a href="">Home</a></li>
-                <li><a href="">Sets</a></li>
+                <li><Link to="/">Home</Link></li>
+                <li><Link to="/sets">Sets</Link></li>
 
                 {user ? (
-                    <li><a href="" onClick={ logout }>Logout</a></li>
+                    <li><Link to="/logout">Logout</Link></li>
                 ) : (
-                    <li><a href="">Login</a></li>
+                    <>
+                        <li><Link to="/login">Login</Link></li>
+                        <li><Link to="/register">Register</Link></li>
+                    </>
                 )}
             </ul>
         </nav>

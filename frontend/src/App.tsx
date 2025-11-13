@@ -1,26 +1,30 @@
-import { useAuth } from "./context/AuthContext";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import RequireAuth from "./routes/RequireAuth";
+import RequireGuest from "./routes/RequireGuest";
+import Home from "./pages/Home";
 import type { JSX } from "react";
-import Login from "./pages/Login"
-import Navigation from "./components/Navigation";
-import UserProfile from "./components/UserProfile";
-import './App.css';
+
+// Pages
+import Login from "./pages/Login";
+import Study from "./pages/Study";
+import BaseLayout from "./layouts/BaseLayout";
 
 function App(): JSX.Element {
-    const { user } = useAuth();
-
-    if (user) {
-        return (
-            <>
-                <Navigation />
-                <UserProfile />
-            </>
-        );
-    }
-
     return (
-        <>
-            <Login />
-        </>
+        <BrowserRouter>
+            <Routes>
+                <Route path="/" element={ <Home /> } />
+                <Route path="/login" element={
+                    <RequireGuest><Login /></RequireGuest>
+                } />
+                <Route path="/study/:setId" element={
+                    <RequireAuth><Study /></RequireAuth>
+                } />
+                <Route path="*" element={
+                    <BaseLayout><p>404 page not found.</p></BaseLayout>
+                } />
+            </Routes>
+        </BrowserRouter>
     );
 }
 

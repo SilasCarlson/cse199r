@@ -1,6 +1,8 @@
 import {JSX, useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import type { AxiosError } from "axios";
+import "../App.css";
+import BaseLayout from "../layouts/BaseLayout";
 
 function Login(): JSX.Element {
     const [ error, setError ] = useState<string | null>(null);
@@ -22,14 +24,16 @@ function Login(): JSX.Element {
     }
 
     return (
-        <form action={handleSubmit}>
-            <h2>Login</h2>
-            {error && (<p>{ error }</p>)}
-            {isLoading && (<p>Logging in...</p>)}
-            <label>Email: <input type="email" placeholder="Email" name="email" /></label>
-            <label>Password: <input type="password" placeholder="Password" name="password" /></label>
-            <button type="submit">Submit</button>
-        </form>
+        <BaseLayout>
+            <form action={handleSubmit}>
+                <h2>Login</h2>
+                {error && (<p>{ error }</p>)}
+                {isLoading && (<p>Logging in...</p>)}
+                <label>Email: <input type="email" placeholder="Email" name="email" /></label>
+                <label>Password: <input type="password" placeholder="Password" name="password" /></label>
+                <button type="submit">Submit</button>
+            </form>
+        </BaseLayout>
     );
 }
 
