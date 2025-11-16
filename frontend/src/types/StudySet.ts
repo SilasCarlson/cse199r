@@ -1,4 +1,4 @@
-export interface Set {
+export interface StudySet {
     id: number;
     name: string;
     description: string;

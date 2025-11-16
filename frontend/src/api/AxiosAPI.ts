@@ -1,7 +1,7 @@
 import axios from "axios";
 import type { AxiosInstance } from "axios";
 
-const api: AxiosInstance = axios.create({
+const AxiosAPI: AxiosInstance = axios.create({
     baseURL: "http://localhost:8000/",
     withCredentials: true,
     withXSRFToken: true,
@@ -11,4 +11,4 @@ const api: AxiosInstance = axios.create({
     }
 });
 
-export default api;
+export default AxiosAPI;

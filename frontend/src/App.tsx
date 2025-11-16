@@ -6,6 +6,7 @@ import type { JSX } from "react";
 
 // Pages
 import Login from "./pages/Login";
+import Logout from "./pages/Logout";
 import Study from "./pages/Study";
 import BaseLayout from "./layouts/BaseLayout";
 
@@ -17,8 +18,11 @@ function App(): JSX.Element {
                 <Route path="/login" element={
                     <RequireGuest><Login /></RequireGuest>
                 } />
-                <Route path="/study/:setId" element={
+                <Route path="/study/:id" element={
                     <RequireAuth><Study /></RequireAuth>
+                } />
+                <Route path="/logout" element={
+                    <RequireAuth><Logout /></RequireAuth>
                 } />
                 <Route path="*" element={
                     <BaseLayout><p>404 page not found.</p></BaseLayout>

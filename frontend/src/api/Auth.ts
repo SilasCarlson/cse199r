@@ -1,23 +1,23 @@
-import api from "./axios";
+import AxiosAPI from "./AxiosAPI";
 import type { User } from "../types/User";
 import type { AxiosError } from "axios";
 
 export async function loginUser(email: string, password: string): Promise<void> {
     // Get CSRF token
-    await api.get("/sanctum/csrf-cookie");
+    await AxiosAPI.get("/sanctum/csrf-cookie");
 
     // Attempt login
-    await api.post("/login", { email, password });
+    await AxiosAPI.post("/login", { email, password });
 }
 
 export async function logoutUser(): Promise<void> {
     // Log the user out
-    await api.post("/logout");
+    await AxiosAPI.post("/logout");
 }
 
 export async function getUser(): Promise<User|null> {
     try {
-        const response = await api.get("/api/user");
+        const response = await AxiosAPI.get("/api/user");
         return response.data;
     } catch (error: AxiosError|any) {
         return null;

@@ -1,59 +1,41 @@
-import api from "../api/axios";
-import { JSX, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import type { AxiosResponse } from "axios";
-import BaseLayout from "../layouts/BaseLayout";
+import type { JSX } from "react";
+import type { StudySet } from "../types/StudySet";
 import type { Word } from "../types/Word";
-
-interface FlashcardSet {
-    id: number;
-    name: string;
-    description: string;
-    created_at: string;
-    updated_at: string;
-}
+import { useParams } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
+import { getStudySet } from "../api/StudySet";
+import BaseLayout from "../layouts/BaseLayout";
 
 function Study(): JSX.Element {
-    const { setId } = useParams();
-    const [ flashcardSet, setFlashcardSet ] = useState<FlashcardSet|null>(null);
-    const [ words, setWords ] = useState<Word[]>([]);
+    const { id } = useParams();
+    const { isPending, isError, error, data } = useQuery({
+        queryKey: ["id", id],
+        queryFn: () => getStudySet(id)
+    });
 
-    // get api crap
-    useEffect((): void => {
-        const getSet: () => Promise<void> = async (): Promise<void> => {
-            const response: AxiosResponse = await api.get("/api/get/set/" + setId);
-            const set: FlashcardSet = response.data.set;
-            setFlashcardSet(set);
+    if (isPending) return (<p>Loading...</p>);
+    if (isError) return (<p>Something went wrong: { error.message }</p>);
 
-            const response2: AxiosResponse = await api.get("/api/get/set/words/" + setId);
-            const words: Word[] = response2.data.words;
-            setWords(words);
-        };
+    if (data) {
+        const studySet: StudySet = data[0];
+        const words: Word[] = data[1];
 
-        getSet().then();
-    }, [])
-
-    if (flashcardSet === null) {
         return (
-            <>
-                <p>Loading...</p>
-            </>
-        )
+            <BaseLayout>
+                <h1>{ studySet.name }</h1>
+                <p>{ studySet.description }</p>
+                <p>Created on : { studySet.created_at }</p>
+                <p>Last updated on : { studySet.updated_at }</p>
+                <ol>
+                    {words.map((word: Word, index: number) =>
+                        <li key={ index }>{ word.native_word } -- { word.foreign_word }</li>
+                    )}
+                </ol>
+            </BaseLayout>
+        );
     }
 
-    return (
-        <BaseLayout>
-            <h1>{ flashcardSet.name }</h1>
-            <p>{ flashcardSet.description }</p>
-            <p>Created on : { flashcardSet.created_at }</p>
-            <p>Last updated on : { flashcardSet.updated_at }</p>
-            <ol>
-                {words.map((word: Word, index: number) => (
-                    <li key={ index }>{ word.native_word } -- { word.foreign_word }</li>
-                ))}
-            </ol>
-        </BaseLayout>
-    );
+    return (<p>Unknown set!</p>);
 }
 
 export default Study;

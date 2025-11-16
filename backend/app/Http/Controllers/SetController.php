@@ -21,6 +21,7 @@ class SetController extends Controller
         $set = Set::Find($id);
         return response()->json([
            "success" => true,
+           "set" => $set,
            "words" => $set->words
         ]);
     }
