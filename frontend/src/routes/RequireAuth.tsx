@@ -3,9 +3,9 @@ import { Navigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 
 function RequireAuth({ children }: { children: JSX.Element }): JSX.Element {
-    const { user } = useAuth();
+    const { userIsLoggedIn } = useAuth();
 
-    if (user !== null) {
+    if (userIsLoggedIn) {
         return children;
     }
 

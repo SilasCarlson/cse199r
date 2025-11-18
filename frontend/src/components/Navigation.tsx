@@ -3,7 +3,7 @@ import { useAuth } from "../context/AuthContext";
 import {Link} from "react-router-dom";
 
 function Navigation(): JSX.Element {
-    const { user, logout } = useAuth();
+    const { userIsLoggedIn } = useAuth();
 
     return (
         <nav>
@@ -11,7 +11,7 @@ function Navigation(): JSX.Element {
                 <li><Link to="/">Home</Link></li>
                 <li><Link to="/sets">Sets</Link></li>
 
-                {user ? (
+                {userIsLoggedIn ? (
                     <li><Link to="/logout">Logout</Link></li>
                 ) : (
                     <>

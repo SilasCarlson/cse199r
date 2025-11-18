@@ -1,13 +1,21 @@
 import AxiosAPI from "./AxiosAPI";
 import type { User } from "../types/User";
-import type { AxiosError } from "axios";
+import type { AxiosError, AxiosResponse } from "axios";
 
-export async function loginUser(email: string, password: string): Promise<void> {
+export interface ILoginProps {
+    email: string;
+    password: string;
+}
+
+export async function loginUser(email: string, password: string): Promise<boolean> {
     // Get CSRF token
     await AxiosAPI.get("/sanctum/csrf-cookie");
 
     // Attempt login
-    await AxiosAPI.post("/login", { email, password });
+    const response = await AxiosAPI.post("/login", { email, password });
+
+    // Return status
+    return response.status === 204;
 }
 
 export async function logoutUser(): Promise<void> {

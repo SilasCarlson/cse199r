@@ -2,11 +2,11 @@ import { useState } from "react";
 import type { JSX } from "react";
 import type { Word } from "../types/Word";
 
-export interface FlashCardProps {
+interface IFlashCardProps {
     word: Word;
 }
 
-export function FlashCard(props: FlashCardProps): JSX.Element {
+export function FlashCard(props: IFlashCardProps): JSX.Element {
 
     const [ frontIsActive, setFrontIsActive ] = useState<Boolean>(true);
 

@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { getStudySet } from "../api/StudySet";
 import BaseLayout from "../layouts/BaseLayout";
+import { FlashCardSet } from "../components/FlashCardSet";
 
 function Study(): JSX.Element {
     const { id } = useParams();
@@ -26,11 +27,7 @@ function Study(): JSX.Element {
                 <p>{ studySet.description }</p>
                 <p>Created on : { studySet.created_at }</p>
                 <p>Last updated on : { studySet.updated_at }</p>
-                <ol>
-                    {words.map((word: Word, index: number) =>
-                        <li key={ index }>{ word.native_word } -- { word.foreign_word }</li>
-                    )}
-                </ol>
+                <FlashCardSet set={ studySet } words={ words } />
             </BaseLayout>
         );
     }
