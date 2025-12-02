@@ -23,10 +23,6 @@ function Study(): JSX.Element {
 
         return (
             <BaseLayout>
-                <h1>{ studySet.name }</h1>
-                <p>{ studySet.description }</p>
-                <p>Created on : { studySet.created_at }</p>
-                <p>Last updated on : { studySet.updated_at }</p>
                 <FlashCardSet set={ studySet } words={ words } />
             </BaseLayout>
         );

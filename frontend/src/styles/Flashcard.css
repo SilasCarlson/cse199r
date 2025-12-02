@@ -1,0 +1,48 @@
+.flashcard-container {
+    /* grid properties */
+    display: grid;
+    justify-items: center;
+
+    /* take full screen */
+    height: 100%;
+    width: 100%;
+    min-height: 90vh;
+
+    /* misc */
+    padding: 1em 0;
+}
+
+.flashcard {
+    width: 50%;
+    height: 100%;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 3em;
+    border-radius: 10px;
+    display: grid;
+    place-items: center;
+    background-color: #3de9f5;
+}
+
+.flashcard-container .controls {
+    width: 50%;
+    text-align: center;
+}
+
+.flashcard-container button {
+    margin: 1em;
+    padding: 1em;
+    color: white;
+    background-color: #334b92;
+    border: none;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.flashcard-container button:hover {
+    background-color: #283a71;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.flashcard-container button:active {
+    background-color: #334b92;
+    transition: background-color 0.2s ease-in-out;
+}

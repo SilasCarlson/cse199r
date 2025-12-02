@@ -1,7 +1,7 @@
 import {JSX, useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import type { AxiosError } from "axios";
-import "../App.css";
+import "../styles/App.css";
 import BaseLayout from "../layouts/BaseLayout";
 
 function Login(): JSX.Element {
