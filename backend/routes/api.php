@@ -9,5 +9,6 @@ Route::middleware(['auth:sanctum'])->get('api/user', function (Request $request)
     return $request->user();
 });
 
+Route::get("api/get/sets", [SetController::class, 'get_all_sets']);
 Route::get("api/get/set/{id}", [SetController::class, "get"]);
 Route::get("api/get/set/words/{id}", [SetController::class, "get_words"]);

@@ -20,7 +20,9 @@ export async function loginUser(email: string, password: string): Promise<boolea
 
 export async function logoutUser(): Promise<void> {
     // Log the user out
-    await AxiosAPI.post("/logout");
+    await AxiosAPI.post("/logout").catch((err: AxiosError) => {
+        // do nothing
+    });
 }
 
 export async function getUser(): Promise<User|null> {

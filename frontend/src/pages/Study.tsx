@@ -14,21 +14,33 @@ function Study(): JSX.Element {
         queryFn: () => getStudySet(id)
     });
 
-    if (isPending) return (<p>Loading...</p>);
-    if (isError) return (<p>Something went wrong: { error.message }</p>);
+    if (isPending) return (
+        <BaseLayout>
+            <p>Loading...</p>
+        </BaseLayout>
 
-    if (data) {
-        const studySet: StudySet = data[0];
-        const words: Word[] = data[1];
+    );
 
-        return (
-            <BaseLayout>
-                <FlashCardSet set={ studySet } words={ words } />
-            </BaseLayout>
-        );
-    }
+    if (isError) return (
+        <BaseLayout>
+            <p>Something went wrong: { error.message }</p>
+        </BaseLayout>
+    );
 
-    return (<p>Unknown set!</p>);
+    if (!data) return (
+        <BaseLayout>
+            <p>Unknown set!</p>
+        </BaseLayout>
+    );
+
+    const studySet: StudySet = data[0];
+    const words: Word[] = data[1];
+
+    return (
+        <BaseLayout>
+            <FlashCardSet set={ studySet } words={ words } />
+        </BaseLayout>
+    );
 }
 
 export default Study;

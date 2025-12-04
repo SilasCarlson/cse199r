@@ -9,12 +9,14 @@ import Login from "./pages/Login";
 import Logout from "./pages/Logout";
 import Study from "./pages/Study";
 import BaseLayout from "./layouts/BaseLayout";
+import Sets from "./pages/Sets";
 
 function App(): JSX.Element {
     return (
         <BrowserRouter>
             <Routes>
                 <Route path="/" element={ <Home /> } />
+                <Route path="/sets" element = { <RequireAuth><Sets /></RequireAuth> } />
                 <Route path="/login" element={
                     <RequireGuest><Login /></RequireGuest>
                 } />

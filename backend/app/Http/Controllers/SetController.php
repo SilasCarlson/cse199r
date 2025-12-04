@@ -25,4 +25,13 @@ class SetController extends Controller
            "words" => $set->words
         ]);
     }
+
+    public function get_all_sets()
+    {
+        $sets = Set::all();
+        return response()->json([
+            "success" => true,
+            "sets" => $sets
+        ]);
+    }
 }

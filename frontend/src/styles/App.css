@@ -8,3 +8,22 @@
 input {
     display: block;
 }
+
+header {
+    text-align: center;
+    background-color: #30b3c8;
+    padding: 1em;
+    color: white;
+}
+
+* {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: Trebuchet MS, Helvetica, sans-serif;
+}
+
+main {
+    margin: 0 20%;
+}

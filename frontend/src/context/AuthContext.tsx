@@ -1,8 +1,7 @@
 import { createContext, useState, useEffect, useContext } from "react";
-import { loginUser, logoutUser, getUser, ILoginProps } from "../api/Auth";
+import { loginUser, logoutUser, getUser } from "../api/Auth";
 import type { JSX } from "react";
 import type { User } from "../types/User";
-import { Navigate } from 'react-router-dom';
 
 export interface AuthContextType {
     userIsLoggedIn: boolean;
@@ -89,5 +88,5 @@ export function AuthProvider({ children }: { children: JSX.Element }): JSX.Eleme
         <AuthContext.Provider value={{ userIsLoggedIn, user, login, logout }}>
             {children}
         </AuthContext.Provider>
-    )
+    );
 }
